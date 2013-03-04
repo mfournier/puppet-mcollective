@@ -1,0 +1,13 @@
+---
+<%
+  mco_facts = scope.to_hash.reject do |k,v|
+    k.to_s =~ /(uptime|timestamp|free|require)/
+  end
+  mco_yaml = String.new
+  mco_facts.each_key.sort.each do |fact|
+    mco_yaml << "  #{fact}: "
+    mco_yaml << mco_facts[fact].to_s
+    mco_yaml << "\n"
+  end
+-%>
+<%= mco_yaml -%>
